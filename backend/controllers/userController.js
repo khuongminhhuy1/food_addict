@@ -42,7 +42,7 @@ export async function createUser(req, res) {
     const message = `
 <p>Hello ${newUser.name},</p>
 <p>Please click the link below to verify the account you just created in Food Addict.</p>
-<p><a href="${process.env.APP_URL}/api/verify/${newUser.id}/${token}">Verify Account</a></p>
+<p><a href="${process.env.APP_URL}/user/verify/${newUser.id}/${token}">Verify Account</a></p>
 <p>Thank you and welcome to our website!</p>
 `;
 

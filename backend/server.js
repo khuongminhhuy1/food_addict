@@ -6,7 +6,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-
 import userRoute from "./routes/userRoute.js";
 import mainRoute from "./routes/mainRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
@@ -23,12 +22,11 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-
 app.use(cors({ credentials: true, origin: true }));
 
 //route
 app.use("/", mainRoute);
-app.use("/api", userRoute);
+app.use("/user", userRoute);
 app.use("/category", categoryRoute);
 app.use("/product", productRoute);
 

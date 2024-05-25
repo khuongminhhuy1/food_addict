@@ -26,7 +26,7 @@ export async function createProduct(req, res) {
 
       // Upload file to Cloudinary
       const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "uploads", // Set the folder where the file will be stored on Cloudinary
+        folder: "uploads",
       });
 
       // Create the product in the database

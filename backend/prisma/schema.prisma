@@ -28,6 +28,7 @@ model User {
   created_at DateTime @default(now())
   token      Token?
   verified   Boolean  @default(false)
+  Order      Order[]
 }
 
 model Token {
@@ -52,4 +53,30 @@ model Product {
   price       Float
   description String
   image       String
+  Order       Order[]
+}
+
+model Order {
+  id         Int            @id @default(autoincrement())
+  user       User           @relation(fields: [userId], references: [id])
+  userId     Int
+  paidAt     DateTime       @default(now())
+  orderId    Int
+  product    Product        @relation(fields: [productId], references: [id])
+  productId  Int
+  quantity   Int
+  totalPrice Float
+  shipping   ShippingInfo[]
+}
+
+model ShippingInfo {
+  id          Int    @id @default(autoincrement())
+  Order       Order? @relation(fields: [orderId], references: [id])
+  orderId     Int?
+  address     String
+  city        String
+  state       String
+  country     String
+  pinCode     String
+  phoneNumber String
 }
