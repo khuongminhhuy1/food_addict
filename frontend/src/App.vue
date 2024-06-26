@@ -1,36 +1,24 @@
 <template>
-    <div id="app">
-      <Header @login-success="handleLoginSuccess" />
-      <Welcome v-if="isAuthenticated" :email="email" @logout="handleLogout" />
+  <template v-if="noHeader">
+    <div class="min-h-screen">
+      <RouterView />
     </div>
   </template>
-  
-  <script>
-  import Header from './layouts/Header.vue'
-  import Welcome from './components/user/Welcome.vue';
-
-  
-  export default {
-    components: {
-      Header,
-      Welcome,
-    },
-    data() {
-      return {
-        isAuthenticated: false,
-        email: '',
-      };
-    },
-    methods: {
-      handleLoginSuccess(email) {
-        this.email = email;
-        this.isAuthenticated = true;
-      },
-      handleLogout() {
-        this.email = '';
-        this.isAuthenticated = false;
-      },
-    },
-  };
-  </script>
-  
+  <template v-else>
+    <div class=" min-h-screen">
+      <Layout>
+        <template #body>
+          <RouterView />
+        </template>
+      </Layout>
+    </div>
+  </template>
+</template>
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+import Layout from './layouts/Layout.vue';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+const route = useRoute();
+const noHeader = computed(() => route.meta.noHeader)
+</script>

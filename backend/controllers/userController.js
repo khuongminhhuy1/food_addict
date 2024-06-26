@@ -45,16 +45,8 @@ export async function createUser(req, res) {
 <p><a href="${process.env.APP_URL}/user/verify/${newUser.id}/${token}">Verify Account</a></p>
 <p>Thank you and welcome to our website!</p>
 `;
-
-    const mailOptions = {
-      from: "your@example.com",
-      to: newUser.email,
-      subject: "Account Verification",
-      html: message,
-    };
-
     await sendEmail(newUser.email, "Verify Email", message);
-    res.send("An Email sent to your account please verify");
+    res.status(201).send("An Email sent to your account please verify");
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -72,7 +64,6 @@ export async function verifyEmail(req, res) {
     if (!user) {
       return res.status(400).send("User not found");
     }
-
     const token = await prisma.token.findFirst({
       where: {
         userId: userId,
@@ -82,9 +73,6 @@ export async function verifyEmail(req, res) {
     if (!token) {
       return res.status(400).send("Invalid or expired token");
     }
-
-    const decodedToken = jwt.verify(token.token, process.env.JWT_SECRET);
-
     await prisma.user.update({
       where: { id: userId },
       data: { verified: true },
@@ -96,7 +84,7 @@ export async function verifyEmail(req, res) {
         id: token.id,
       },
     });
-    res.redirect("/api/verified");
+    res.redirect("/user/verified");
   } catch (error) {
     console.error("Error verifying email:", error);
     res.status(400).json({ error: "Invalid or expired token." });
@@ -112,25 +100,33 @@ export async function loginUser(req, res) {
     });
 
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).send({ message: "User not found" });
     }
     if (verified === false) {
-      return res.status(400).json({ message: "User hasn't been verified yet" });
+      return res.status(400).send({ message: "User hasn't been verified yet" });
     }
     const isPasswordValid = await comparePassword(password, user.password);
 
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Password Incorrect" });
+    } else {
+      const token = jwt.sign(
+        {
+          userId: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.status(200).send(token);
+        }
+      );
     }
-
-    const token = jwt.sign(
-      { userId: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "24h", // Token expires in 24 hours
-      }
-    );
-    res.json({ message: "Login successful", token });
   } catch (error) {
     res.status(500).send(error.message);
   }
