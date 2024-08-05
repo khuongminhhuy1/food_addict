@@ -93,3 +93,27 @@ export async function deleteProduct(req, res) {
     },
   });
 }
+export async function getAllProduct(req, res) {
+  try {
+    const products = await prisma.product.findMany();
+    res.json(products);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
+
+export async function getProductById(req, res) {
+  const { id } = req.params;
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id: parseInt(id) },
+    });
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404).send("Product not found");
+    }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}

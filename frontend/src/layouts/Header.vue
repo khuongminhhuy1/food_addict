@@ -1,39 +1,55 @@
 <template>
-  <header class="font-fjalla sticky top-0 z-50 bg-gray-800 w-full ">
+  <header class="font-fjalla sticky top-0 z-50  w-full ">
     <slot name="header">
-      <div class="w-full flex items-center p-4 ">
-        <!-- Menu -->
-        <div class="flex-auto text-white ">
-          <h1 class="text-2xl">Food Addict</h1>
-        </div>
-        <!-- Icon -->
-        <div class="flex-noneflex items-center justify-center">
-          <div class="flex flex-row justify-between items-center">
-            <a href="#">
-              <div class="flex flex-row items-center bg-white px-6 rounded-lg">
-                <p class="text-black">Food </p>
-                <img src="../assets/images/fast-food.jpg" class="w-[50px]" alt="">
-                <p class=" text-black"> Addict</p>
+      <div class="w-full flex items-center p-2 bg-white ">
+        <div class="navbar bg-base-100 ">
+          <div class="navbar-start">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
               </div>
-            </a>
-
+              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li><a>Homepage</a></li>
+                <li><a>Portfolio</a></li>
+                <li><a>About</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="navbar-center">
+            <a class="btn btn-ghost text-xl">Food Addict.</a>
+          </div>
+          <div class="navbar-end">
+            <div class="flex-auto flex justify-end items-center">
+              <div v-if="!isAuthenticated">
+                <button class="btn w-[100px]" @click="showModal = true">
+                  Login
+                </button>
+              </div>
+              <div v-else>
+                <div class="dropdown dropdown-bottom dropdown-end">
+                  <div tabindex="0" role="button">
+                    <div class="w-12 rounded">
+                      <img class="rounded-lg"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    </div>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                      <li>Cart</li>
+                      <li>Link e-wallets</li>
+                      <li @click="logout">Logout</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- Login Btn -->
-        <div class="flex-auto flex justify-end items-center">
-          <div v-if="!isAuthenticated">
-            <button class="btn w-[100px]" @click="showModal = true">
-              Login
-            </button>
-          </div>
-          <div v-else>
-            <span class="pr-5">Hello, {{ user.name }}</span>
-            <button class="btn w-[100px]" @click="logout">Logout</button>
-          </div>
-        </div>
-
       </div>
-      <!-- Line -->
+
+      <!-- Login Btn -->
+
 
       <!-- Login/Register Modal -->
       <div v-if="showModal" class="modal modal-open">

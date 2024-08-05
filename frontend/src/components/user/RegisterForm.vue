@@ -57,8 +57,8 @@ export default {
       }
 
       try {
-        const res = await register(this.name, this.email, this.password);
-        this.$emit('register-success', res.data.name);
+        const response = await register(this.name, this.email, this.password);
+        this.$emit('register-success', response.data.name);
       } catch (error) {
         console.log(error)
       }

@@ -10,6 +10,9 @@ export default {
       fontFamily: {
         fjalla: "Fjalla One",
       },
+      backgroundImage: {
+        "gif-background": "url('./src/assets/images/Background-2.gif')",
+      },
     },
   },
   plugins: [require("daisyui"), require("tailwindcss-animated")],

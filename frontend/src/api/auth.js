@@ -56,3 +56,11 @@ export const register = async (name, email, password) => {
     );
   }
 };
+
+export const products = async (req, res) => {
+ try {
+  const response = await axios.get(`${api_url}/product`)
+ } catch (error) {
+  
+ }
+};

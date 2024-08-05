@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = PrismaClient();
+const prisma = new PrismaClient();
 // Function to create an order with shipping information
 
 export async function addItemToCart(req, res) {
