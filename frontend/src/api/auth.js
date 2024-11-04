@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 const api_url = "http://localhost:8080";
 const toast = useToast();
-
+// user
 export const login = async (email, password) => {
   try {
     const response = await axios.post(`${api_url}/user/login`, {
@@ -56,11 +56,29 @@ export const register = async (name, email, password) => {
     );
   }
 };
-
-export const products = async (req, res) => {
- try {
-  const response = await axios.get(`${api_url}/product`)
- } catch (error) {
-  
- }
+// product
+export const GetProducts = async () => {
+  try {
+    const response = await axios.get(`${api_url}/product`);
+    return response;
+  } catch (error) {
+    toast.error(error.response ? error.response.data.message : error.message);
+  }
+};
+export const getProductById = async (id) => {
+  try {
+    const response = await axios.get(`${api_url}/product/${id}`);
+    return response.data;
+  } catch (error) {
+    toast.error(error.response ? error.response.data.message : error.message);
+  }
+};
+//categories
+export const GetCategories = async () => {
+  try {
+    const response = await axios.get(`${api_url}/category`);
+    return response;
+  } catch (error) {
+    toast.error(error.response ? error.response.data.message : error.message);
+  }
 };

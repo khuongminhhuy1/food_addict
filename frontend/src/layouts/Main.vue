@@ -9,19 +9,19 @@
     </div>
 
     <div class="pt-10">
-        <NewProductBar />
+        <Products />
     </div>
-    <div class="">
-
+    <div class="pt-10">
+        <Categories />
     </div>
 </template>
   
 <script>
 export default {
     name: 'Main',
-    components: { NewProductBar, Categories }
+    components: { Products, Categories }
 };
-import NewProductBar from '../components/product/newProductBar.vue';
+import Products from '../components/product/newProductBar.vue';
 import Categories from '../components/product/Categories.vue';
 </script>
   

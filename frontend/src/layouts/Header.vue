@@ -1,7 +1,7 @@
 <template>
   <header class="font-fjalla sticky top-0 z-50  w-full ">
     <slot name="header">
-      <div class="w-full flex items-center p-2 bg-white ">
+      <div class="w-full flex items-center ">
         <div class="navbar bg-base-100 ">
           <div class="navbar-start">
             <div class="dropdown">
@@ -33,7 +33,7 @@
                   <div tabindex="0" role="button">
                     <div class="w-12 rounded">
                       <img class="rounded-lg"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>
                     <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                       <li>Cart</li>

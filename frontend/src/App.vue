@@ -5,7 +5,7 @@
     </div>
   </template>
   <template v-else>
-    <div class=" min-h-screen bg-orange-200">
+    <div class=" min-h-screen bg-white">
       <Layout>
         <template #body>
           <RouterView />
