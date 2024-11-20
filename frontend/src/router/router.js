@@ -3,7 +3,7 @@ import Main from "../layouts/Main.vue";
 import Verify from "../components/user/Verify.vue";
 import Products from "../components/product/newProductBar.vue";
 import singleProduct from "../components/product/singleProduct.vue";
-
+import cartPage from "../components/cart/cartPage.vue";
 const routes = [
   {
     path: "/",
@@ -25,6 +25,12 @@ const routes = [
     component: singleProduct,
     meta: { noHeader: false },
     name: "singleProduct",
+  },
+  {
+    path: "/cart",
+    component: cartPage,
+    meta: { noHeader: false },
+    name: "cartPage",
   },
 ];
 

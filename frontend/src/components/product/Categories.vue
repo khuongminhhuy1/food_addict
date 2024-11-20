@@ -21,6 +21,8 @@
     </div>
 </template>
 <script>
+import Header from '../../layouts/Header.vue';
+import Footer from '../../layouts/Footer.vue';
 import { GetCategories } from '../../api/auth';
 export default {
     name: "Categories",

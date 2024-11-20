@@ -11,6 +11,7 @@ import mainRoute from "./routes/mainRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
 import productRoute from "./routes/productRoute.js";
 import orderRoute from "./routes/orderRoute.js";
+import cartRoute from "./routes/cartRoute.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,6 +32,7 @@ app.use("/user", userRoute);
 app.use("/category", categoryRoute);
 app.use("/product", productRoute);
 app.use("/orders", orderRoute);
+app.use("/cart", cartRoute);
 
 const port = process.env.PORT || 5555;
 app.listen(port, () => console.log(`Listening on port ${port}`));
