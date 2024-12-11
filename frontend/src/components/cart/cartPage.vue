@@ -1,8 +1,8 @@
 <template>
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6 font-fjalla">
         <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
 
-        <div v-if="cartItems.length > 0">
+        <div v-if="cartItems.length > 0" >
             <!-- Cart Items -->
             <div v-for="item in paginatedItems" :key="item.id" class="border p-4 rounded mb-4">
                 <h2 class="text-xl font-semibold">{{ item.name }}</h2>
@@ -13,6 +13,8 @@
                         <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
                         <p class="text-gray-600">Total: ${{ (item.price * item.quantity).toFixed(2) }}</p>
                     </div>
+                    <button @click="removeItem(item.id)" class="bg-red-500 text-white px-4 py-2 rounded">Remove
+                        Item</button>
                 </div>
             </div>
 
@@ -41,6 +43,7 @@
 
 <script>
 import { fetchCart } from '../../api/auth';
+import { removeItemFromCart } from '../../api/auth';
 export default {
     name: "cartPage",
     data() {
@@ -99,6 +102,21 @@ export default {
             if (this.currentPage > 1) {
                 this.currentPage--;
             }
+        },
+        removeItem(cartItemId) {
+            removeItemFromCart(cartItemId)
+                .then(() => {
+                    // Update the cartItems list after removal
+                    this.cartItems = this.cartItems.filter(item => item.id !== cartItemId);
+
+                    // Recalculate the total charge
+                    this.totalCharge = this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+                    console.log(`Item with ID ${cartItemId} removed successfully.`);
+                })
+                .catch(error => {
+                    console.error("Error removing cart item:", error);
+                });
         },
     },
     mounted() {

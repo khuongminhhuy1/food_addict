@@ -18,8 +18,8 @@
                                 <NavLink :active="isActive" :href="href" @click="navigate">Cart</NavLink>
                             </router-link>
                         </li>
-                        <li>Link e-wallets</li>
-                        <li @click="logout">Logout</li>
+                        <li><router-link>Link e-wallets </router-link> </li>
+                        <li @click="logout"><router-link>Logout</router-link></li>
                     </ul>
                 </div>
             </div>

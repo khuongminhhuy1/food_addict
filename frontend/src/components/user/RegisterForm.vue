@@ -34,7 +34,7 @@
 <script>
 import { register } from '../../api/auth.js';
 import { useToast } from 'vue-toastification';
-
+import Loading from '../loading/Loading.vue';
 export default {
   data() {
     return {
@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     async register() {
+      this.loading = true;
       this.attemptedSubmit = true;
       const toast = useToast();
 
@@ -58,7 +59,11 @@ export default {
 
       try {
         const response = await register(this.name, this.email, this.password);
-        this.$emit('register-success', response.data.name);
+        setTimeout(() => {
+          this.loading = false;
+          this.$emit('register-success', response.data.name);
+        }, 3000)
+
       } catch (error) {
         console.log(error)
       }

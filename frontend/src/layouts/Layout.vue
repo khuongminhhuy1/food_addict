@@ -1,8 +1,8 @@
 <template>
-  <div class="">
+  <div class="flex flex-col min-h-screen">
     <Header @login-success="handleLoginSuccess" />
     <main class="p-4 w-full">
-      <div class="w-full flex flex-col justify-center items-center">
+      <div class="w-full flex flex-col justify-center items-center flex-grow ">
         <div class="w-10/12">
           <slot name="body"></slot>
         </div>

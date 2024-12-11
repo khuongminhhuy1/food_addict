@@ -117,3 +117,16 @@ export async function getProductById(req, res) {
     res.status(500).send(error.message);
   }
 }
+export const getProductByCategory = async (req, res) => {
+  const { categoryId } = req.params;
+  try {
+    const products = await prisma.product.findMany({
+      where: { categoryId: parseInt(categoryId) },
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products by category:", error);
+    res.status(500).json({ message: "Error fetching products." });
+  }
+};

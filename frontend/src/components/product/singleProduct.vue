@@ -1,5 +1,5 @@
 <template #body>
-    <div v-if="product">
+    <div v-if="product" class="font-fjalla">
         <h1 class="text-3xl font-bold mb-6">Product Details</h1>
         <div class="flex flex-wrap md:flex-row gap-4 items-center justify-evenly">
             <!-- Product Image -->
